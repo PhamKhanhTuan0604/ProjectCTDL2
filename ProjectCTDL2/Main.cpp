@@ -23,17 +23,13 @@ int createMainMenu()
 {
 	int iSelect = 0;
 	system("cls");
-
-	ShowCursor(0);
-	gotoxy(75, 1);
+	string strChucNang[5] = {"Hien thi thong tin hang hoa","Tim kiem thong tin hang hoa" ,"Dat hang" , "Quan li" , "Thoat" };
+	ShowCur(0);
+	gotoxy(75, 3);
 	SetColor(51);
 	cout << "TAP HOA TU CA" << endl; // In tieu de
 
-	int iCounter = 2;
-	char cKey;
-	int iX = 63, iY = 4; // lay toa do x = 50, y = 4 trong man hinh console.
-
-	
+	int iX = 63, iY = 7; // lay toa do x = 50, y = 4 trong man hinh console.
 
 	// Tao giao dien menu
 	box(iX, iY + 0, 35, 2, 33, 7, "Hien thi thong tin hang hoa");
@@ -50,14 +46,49 @@ int createMainMenu()
 		gotoxy(iX + 35, iY + (i * 2));
 		cout << char(180);
 	}
-
-	/*int iY = 4;
-	int iXNow = iX, iYNow = iY;
-	bool bCheck = true;
+	//In ra menu ban dau, chua thao tac
+	changeContentColor(iX , iY , strChucNang[0]);
+	
+	/*int iXp = iX, iYp = iY; // toa do chu to mau
+	int iXcu = iXp, int iYcu = iYp;
+	bool bFlag = true;
 	while (true)
 	{
+		if (bFlag)
+		{
+			//xoa
+			gotoxy(iXcu, iYcu);
+			changeContentColor(iX, iY, strChucNang[0]);
+			iXcu = iXp; iYcu = iYp;
+
+			changeContentColor(iX, iY, strChucNang[0]);
+			bool Flag = false;
+		}
+		// Dieu khien - di chuyen
+		if (_kbhit())
+		{
+			char cDo = _getch();
+			if (cDo == -32)
+			{
+				bFlag = true; // da bam
+				cDo = _getch();
+				if (cDo == 72) // Mui ten len
+				{
+					if (iYp != iY)
+						iYp -= 2;
+					else
+						iYp = iY;
+
+				}
+				else if (cDo == 80) // Mui ten xuong
+				{
+					iYp += 2;
+				}
+			}
+		}
 
 	}*/
 	_getch();
 	return iSelect;
 }
+// chua xong menu

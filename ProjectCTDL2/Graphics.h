@@ -127,11 +127,21 @@ void SetColor(WORD color)
 }
 /***********************************************
 @ Decription Thay doi mau noi dung trong khung.
-@ parameter Toa do x, y, dai, cao, noi dung.
+@ parameter Toa do x, y, noi dung.
 ***********************************************/
-void changeContentColor(int x, int y, int w, int h, string nd)
+void changeContentColor(int x, int y, string nd)
 {
 	SetColor(2);
 	gotoxy(x + 1, y + 1);
 	cout << nd;
+}
+/*************************************************
+* @Decription An con tro man hinh console
+* @parameter Trang thai con tro, 0 la an, 1 la hien
+*************************************************/
+void ShowCur(bool CursorVisibility)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
+	SetConsoleCursorInfo(handle, &cursor);
 }
