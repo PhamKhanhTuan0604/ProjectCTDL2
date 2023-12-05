@@ -145,3 +145,26 @@ void ShowCur(bool CursorVisibility)
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
 	SetConsoleCursorInfo(handle, &cursor);
 }
+/*******************************************
+* @Decription Ve menu ban dau
+* @parameter x, y, width, hight , t color, b color, noi dung
+*******************************************/
+void drawMenu(int x, int y, string nd[])
+{
+	int iX = x, iY = y;
+	// Tao giao dien menu ban dau
+	box(iX, iY + 0, 35, 2, 33, 7, nd[0]);
+	box(iX, iY + 2, 35, 2, 33, 7, nd[1]);
+	box(iX, iY + 4, 35, 2, 33, 7, nd[2]);
+	box(iX, iY + 6, 35, 2, 33, 7, nd[3]);
+	box(iX, iY + 8, 35, 2, 33, 7, nd[4]);
+	// fix goc cua may cai canh
+	for (int i = 1; i <= 4; i++)
+	{
+		gotoxy(iX, iY + (i * 2));
+		SetColor(33);
+		cout << char(195);
+		gotoxy(iX + 35, iY + (i * 2));
+		cout << char(180);
+	}
+}

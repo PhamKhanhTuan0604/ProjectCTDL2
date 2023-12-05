@@ -11,8 +11,36 @@ int createMainMenu();
 
 int main()
 {
-	createMainMenu();
-	
+	if (createMainMenu() == 1)
+	{
+		//to do sth
+		system("cls");
+		cout << 1 << endl;
+	}
+	else if (createMainMenu() == 2)
+	{
+		//to do sth
+		system("cls");
+		cout << 2 << endl;
+	}
+	else if (createMainMenu() == 3)
+	{
+		//to do sth
+		system("cls");
+		cout << 3 << endl;
+	}
+	else if (createMainMenu() == 4)
+	{
+		//to do sth
+		system("cls");
+		cout << 4 << endl;
+	}
+	else if (createMainMenu() == 5)
+	{
+		//to do sth
+		system("cls");
+		exit(0);
+	}
 	return 0;
 }
 /***********************************************
@@ -21,7 +49,7 @@ int main()
 ************************************************/
 int createMainMenu()
 {
-	int iSelect = 0;
+	int iSelect = 1;
 	system("cls");
 	string strChucNang[5] = {"Hien thi thong tin hang hoa","Tim kiem thong tin hang hoa" ,"Dat hang" , "Quan li" , "Thoat" };
 	ShowCur(0);
@@ -29,66 +57,73 @@ int createMainMenu()
 	SetColor(51);
 	cout << "TAP HOA TU CA" << endl; // In tieu de
 
-	int iX = 63, iY = 7; // lay toa do x = 50, y = 4 trong man hinh console.
+	int iX = 63, iY = 7; // lay toa do x = 63, y = 7 trong man hinh console.
+	//drawMenu(iX, iY, strChucNang);
 
-	// Tao giao dien menu
-	box(iX, iY + 0, 35, 2, 33, 7, "Hien thi thong tin hang hoa");
-	box(iX, iY + 2, 35, 2, 33, 7, "Tim kiem thong tin hang hoa");
-	box(iX, iY + 4, 35, 2, 33, 7, "Dat hang");
-	box(iX, iY + 6, 35, 2, 33, 7, "Quan li");
-	box(iX, iY + 8, 35, 2, 33, 7, "Thoat");
-	// fix goc cua may cai canh
-	for (int i = 1; i <= 4; i++)
-	{
-		gotoxy(iX , iY + (i * 2));
-		SetColor(33);
-		cout << char(195);
-		gotoxy(iX + 35, iY + (i * 2));
-		cout << char(180);
-	}
-	//In ra menu ban dau, chua thao tac
-	changeContentColor(iX , iY , strChucNang[0]);
-	
-	/*int iXp = iX, iYp = iY; // toa do chu to mau
-	int iXcu = iXp, int iYcu = iYp;
-	bool bFlag = true;
+	int iXp = iX, iYp = iY; // toa do thay doi mau chu
+	int iXcu = iXp, iYcu = iYp;
+	bool bCheck = true;
 	while (true)
 	{
-		if (bFlag)
+		char cIn;
+		if (bCheck == true)
 		{
-			//xoa
 			gotoxy(iXcu, iYcu);
-			changeContentColor(iX, iY, strChucNang[0]);
+			drawMenu(iX, iY, strChucNang);
+			changeContentColor(iXp, iYp, strChucNang[iSelect - 1]);
 			iXcu = iXp; iYcu = iYp;
 
-			changeContentColor(iX, iY, strChucNang[0]);
-			bool Flag = false;
+			changeContentColor(iXcu, iYcu, strChucNang[iSelect - 1]);
+			bCheck = false;
 		}
-		// Dieu khien - di chuyen
+
 		if (_kbhit())
 		{
-			char cDo = _getch();
-			if (cDo == -32)
+			//cIn = getchar();
+			cIn = _getch();
+			if (cIn == -32)
 			{
-				bFlag = true; // da bam
-				cDo = _getch();
-				if (cDo == 72) // Mui ten len
+				bCheck = true;
+				cIn = _getch();
+				if (cIn == 72) // mui ten len
 				{
-					if (iYp != iY)
-						iYp -= 2;
+					if (iSelect == 1)
+					{
+						iSelect = 5;
+						iYp = iY + 8;
+					}
 					else
-						iYp = iY;
-
+					{
+						iSelect -= 1;
+						iYp -= 2;
+					}
 				}
-				else if (cDo == 80) // Mui ten xuong
+				else if (cIn == 80) // mui ten xuong
 				{
-					iYp += 2;
+					if (iSelect == 5)
+					{
+						iSelect = 1;
+						iYp = iY;
+					}
+					else
+					{
+						iSelect += 1;
+						iYp += 2;
+					}
+				}
+				else //if (cIn == '\r')
+				{
+					return iSelect;
+					//break;
 				}
 			}
+			else
+		    {
+				return iSelect;
+				//break;
+			}
 		}
-
-	}*/
-	_getch();
+		
+	}
 	return iSelect;
 }
-// chua xong menu
