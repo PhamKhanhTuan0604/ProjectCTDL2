@@ -11,31 +11,32 @@ int createMainMenu();
 
 int main()
 {
-	if (createMainMenu() == 1)
+	int iChose = createMainMenu();
+	if (iChose == 1)
 	{
 		//to do sth
 		system("cls");
 		cout << 1 << endl;
 	}
-	else if (createMainMenu() == 2)
+	else if (iChose == 2)
 	{
 		//to do sth
 		system("cls");
 		cout << 2 << endl;
 	}
-	else if (createMainMenu() == 3)
+	else if (iChose == 3)
 	{
 		//to do sth
 		system("cls");
 		cout << 3 << endl;
 	}
-	else if (createMainMenu() == 4)
+	else if (iChose == 4)
 	{
 		//to do sth
 		system("cls");
 		cout << 4 << endl;
 	}
-	else if (createMainMenu() == 5)
+	else if (iChose == 5)
 	{
 		//to do sth
 		system("cls");
@@ -44,8 +45,8 @@ int main()
 	return 0;
 }
 /***********************************************
-@ Description Ham tao menu cac chuc nang
-@ attention Neu chon exit thi thoat chuong trinh
+* @Description Ham tao menu cac chuc nang
+* @attention Neu chon exit thi thoat chuong trinh
 ************************************************/
 int createMainMenu()
 {
@@ -58,12 +59,10 @@ int createMainMenu()
 	cout << "TAP HOA TU CA" << endl; // In tieu de
 
 	int iX = 63, iY = 7; // lay toa do x = 63, y = 7 trong man hinh console.
-	//drawMenu(iX, iY, strChucNang);
-
 	int iXp = iX, iYp = iY; // toa do thay doi mau chu
 	int iXcu = iXp, iYcu = iYp;
-	bool bCheck = true;
-	while (true)
+	bool bCheck = true, bStop = true;
+	while (bStop)
 	{
 		char cIn;
 		if (bCheck == true)
@@ -111,16 +110,16 @@ int createMainMenu()
 						iYp += 2;
 					}
 				}
-				else //if (cIn == '\r')
+				else if (cIn == '\r')
 				{
-					return iSelect;
-					//break;
+					//return iSelect;
+					bStop = false;
+					break;
 				}
 			}
 			else
-		    {
-				return iSelect;
-				//break;
+			{
+				bStop = false;
 			}
 		}
 		
