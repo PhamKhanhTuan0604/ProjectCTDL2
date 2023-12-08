@@ -5,18 +5,32 @@
 #include <conio.h>
 #include <Windows.h>
 #include <string>
+#include "HangHoa.h"
+#include <fstream>
 using namespace std;
 
+void Menu();
 int createMainMenu();
+void readHangHoa(Queue<HangHoa> hangHoa, string fn);
 
 int main()
 {
+	Menu();
+	return 0;
+}
+/********************************************
+* @Decription Menu de chay chuong trinh
+*********************************************/
+void Menu()
+{
+	Queue<HangHoa> hangHoa;
+	readHangHoa(hangHoa, "HangHoa.txt");
 	int iChose = createMainMenu();
 	if (iChose == 1)
 	{
 		//to do sth
 		system("cls");
-		cout << 1 << endl;
+		readHangHoa(hangHoa, "HangHoa.txt");
 	}
 	else if (iChose == 2)
 	{
@@ -42,7 +56,6 @@ int main()
 		system("cls");
 		exit(0);
 	}
-	return 0;
 }
 /***********************************************
 * @Description Ham tao menu cac chuc nang
@@ -125,4 +138,43 @@ int createMainMenu()
 		
 	}
 	return iSelect;
+}
+/******************************************
+* @Decription Doc du lieu tu file
+*******************************************/
+void readHangHoa(Queue<HangHoa> hangHoa, string fn)
+{
+	ifstream infile;
+	infile.open("fn", ios::in);
+	if (infile.is_open())
+		cout << "Khong the mo duoc file";
+	else
+	{
+		HangHoa h;
+		int iNumber;
+		infile >> iNumber;
+		string strMaHang;
+		string strTenHang;
+		string strNoiSanXuat;
+		string strMauSac;
+		int iGiaBan;
+		string strNgayNhapKho;
+		int iSoLuong;
+		for (int i = 0; i < iNumber; i++)
+		{
+			infile >> strMaHang;
+			infile.ignore();
+			getline(infile, strTenHang);
+			getline(infile, strNoiSanXuat);
+			getline(infile, strMauSac);
+			infile >> iGiaBan;
+			infile.ignore();
+			getline(infile, strNgayNhapKho);
+			infile >> iSoLuong;
+			h = HangHoa(strMaHang, strTenHang, strNoiSanXuat, strMauSac, iGiaBan, strNgayNhapKho, iSoLuong);
+			hangHoa.enQueue(h);
+		}
+		infile.close();
+	}
+	hangHoa.display();
 }

@@ -132,9 +132,14 @@
     <ClCompile Include="Queue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DonHang.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="HangHoa.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Queue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HangHoa.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

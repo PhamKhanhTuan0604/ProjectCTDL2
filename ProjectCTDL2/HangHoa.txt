@@ -1,0 +1,36 @@
+5
+SUA1
+Sua TH True Milk
+Viet Nam
+Xanh
+9000
+12/08/2023
+1000
+SUA2
+Sua Milo
+Viet Nam
+Xanh la
+8000
+15/09/2023
+1000
+MI01
+Mi Hao Hao
+Viet Nam
+Hong
+3500
+15/05/2023
+2000
+MI02
+Mi Thanh long Caty
+Viet Nam
+Trang
+10000
+20/11/2023
+500
+WT01
+Coca Cola
+Viet Nam
+Do
+10000
+22/10/2023
+700
