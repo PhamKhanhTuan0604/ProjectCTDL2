@@ -7,6 +7,7 @@
 #include <string>
 #include "HangHoa.h"
 #include <fstream>
+#include <cstdlib>
 using namespace std;
 
 void Menu();
@@ -24,6 +25,7 @@ int main()
 void Menu()
 {
 	Queue<HangHoa> hangHoa;
+
 	readHangHoa(hangHoa, "HangHoa.txt");
 	int iChose = createMainMenu();
 	if (iChose == 1)
@@ -31,6 +33,7 @@ void Menu()
 		//to do sth
 		system("cls");
 		readHangHoa(hangHoa, "HangHoa.txt");
+		hangHoa.display();
 	}
 	else if (iChose == 2)
 	{
@@ -52,7 +55,6 @@ void Menu()
 	}
 	else if (iChose == 5)
 	{
-		//to do sth
 		system("cls");
 		exit(0);
 	}
@@ -140,7 +142,7 @@ int createMainMenu()
 	return iSelect;
 }
 /******************************************
-* @Decription Doc du lieu tu file
+* @Decription Doc du lieu tu file vao queue (Hang Hoa)
 *******************************************/
 void readHangHoa(Queue<HangHoa> hangHoa, string fn)
 {
@@ -176,5 +178,4 @@ void readHangHoa(Queue<HangHoa> hangHoa, string fn)
 		}
 		infile.close();
 	}
-	hangHoa.display();
 }
