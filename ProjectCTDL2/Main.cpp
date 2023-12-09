@@ -12,8 +12,7 @@ using namespace std;
 
 void Menu();
 int createMainMenu();
-void readHangHoa(Queue<HangHoa> hangHoa, string fn);
-
+void readHangHoa(Queue<HangHoa>& hangHoa, string& fn);
 int main()
 {
 	Menu();
@@ -25,15 +24,13 @@ int main()
 void Menu()
 {
 	Queue<HangHoa> hangHoa;
-
-	readHangHoa(hangHoa, "HangHoa.txt");
+	string strFile = "HangHoa.txt";
+	readHangHoa(hangHoa, strFile);
 	int iChose = createMainMenu();
 	if (iChose == 1)
 	{
 		//to do sth
 		system("cls");
-		readHangHoa(hangHoa, "HangHoa.txt");
-		hangHoa.display();
 	}
 	else if (iChose == 2)
 	{
@@ -144,38 +141,28 @@ int createMainMenu()
 /******************************************
 * @Decription Doc du lieu tu file vao queue (Hang Hoa)
 *******************************************/
-void readHangHoa(Queue<HangHoa> hangHoa, string fn)
+void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 {
-	ifstream infile;
-	infile.open("fn", ios::in);
+	ifstream infile(fn);
 	if (infile.is_open())
-		cout << "Khong the mo duoc file";
-	else
 	{
 		HangHoa h;
-		int iNumber;
-		infile >> iNumber;
-		string strMaHang;
-		string strTenHang;
-		string strNoiSanXuat;
-		string strMauSac;
-		int iGiaBan;
-		string strNgayNhapKho;
-		int iSoLuong;
-		for (int i = 0; i < iNumber; i++)
+		while (infile >> h)
 		{
-			infile >> strMaHang;
-			infile.ignore();
-			getline(infile, strTenHang);
-			getline(infile, strNoiSanXuat);
-			getline(infile, strMauSac);
-			infile >> iGiaBan;
-			infile.ignore();
-			getline(infile, strNgayNhapKho);
-			infile >> iSoLuong;
-			h = HangHoa(strMaHang, strTenHang, strNoiSanXuat, strMauSac, iGiaBan, strNgayNhapKho, iSoLuong);
+			string iCheck = h.getMaHang();
+			if (iCheck.length() != 4) // kiem tra ma hang co 4 ki tu hay khong
+			{
+				cout << "Ma hang lon hon 4 ki tư"; 
+				break;
+			}
 			hangHoa.enQueue(h);
 		}
-		infile.close();
+	}
+	else
+	{
+		cout << "Khong the mo file " << endl;
 	}
 }
+/******************************************
+* Decription Se in ra thong tin hang hoa
+******************************************/

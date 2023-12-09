@@ -18,7 +18,7 @@ public:
     {
         return _strMaHang;
     }
-    int getGia()
+    int getGiaBan()
     {
         return _iGiaBan;
     }
@@ -29,6 +29,22 @@ public:
     void setSoLuong(int iSoLuong)
     {
         _iSoLuong = iSoLuong;
+    }
+    string getTenHang()
+    {
+        return _strTenHang;
+    }
+    string getNoiSanXuat()
+    {
+        return _strNoiSanXuat;
+    }
+    string getMauSac()
+    {
+        return _strMauSac;
+    }
+    string getNgayNhapKho()
+    {
+        return _strNgayNhapKho;
     }
     HangHoa(string strMaHang = "MMMM", string strTenHang = "Unknow", string strNoiSanXuat = "Unknow", string strMauSac = "Unknow", int iGiaBan = 0, string strNgayNhapKho = "Unknow", int iSoLuong = 0)
     {

@@ -13,5 +13,5 @@ Node<DataType>::Node(DataType data)
 template <class DataType>
 void Node<DataType>::display()
 {
-	cout << _data << " ";
+	cout << _data;
 }

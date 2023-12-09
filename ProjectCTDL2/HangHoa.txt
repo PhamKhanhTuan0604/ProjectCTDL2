@@ -1,4 +1,3 @@
-5
 SUA1
 Sua TH True Milk
 Viet Nam
@@ -34,3 +33,17 @@ Do
 10000
 22/10/2023
 700
+CLT1
+Ao ba lo
+Viet Nam
+Trang
+60000
+9/12/2023
+100
+SCL1
+Kit Kat
+Nhat Ban
+19000
+Do
+9/12/2023
+200
