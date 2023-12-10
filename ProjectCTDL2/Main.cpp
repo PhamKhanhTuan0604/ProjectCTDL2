@@ -37,13 +37,26 @@ void Menu()
 		int iX = 5, iY = 5;
 		printLetterHead(5, 5, 150, 2, 11); // in muc cac thong tin
 		HangHoa temp;
+		//In thong tin hang hoa
 		while (!hangHoa.isEmpty())
 		{
 			iY += 3;
 			temp = hangHoa.deQueue();
 			temp.printHangHoa(iX, iY);
 		}
-		//printGoods(hangHoa);
+		//Lua chon tiep tuc hay thoat ra
+		gotoxy(50, iY + 5);
+		SetColor(10);
+		cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh.";
+		gotoxy(50, iY + 6);
+		cout << "Lua chon cua ban: ";
+		SetColor(7);
+		int iSelect;
+		cin >> iSelect;
+		if (iSelect == 1)
+			Menu();
+		else if (iSelect == 0)
+			exit(0);
 	}
 	else if (iChose == 2)
 	{
@@ -174,24 +187,5 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 	else
 	{
 		cout << "Khong the mo file " << endl;
-	}
-}
-/******************************************
-* Decription Se in ra thong tin hang hoa
-******************************************/
-void printGoods(Queue<HangHoa> hangHoa)
-{
-	gotoxy(75, 3);
-	SetColor(51);
-	cout << "TAP HOA TU CA" << endl; // In ten shop
-
-	int iX = 5, iY = 5;
-	printLetterHead(5, 5, 150, 2, 11); // in muc cac thong tin
-	HangHoa temp;
-	while (!hangHoa.isEmpty())
-	{
-		iY += 3;
-		temp = hangHoa.deQueue();
-		temp.printHangHoa(iX, iY);
 	}
 }
