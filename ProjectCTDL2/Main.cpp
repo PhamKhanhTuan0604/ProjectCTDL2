@@ -29,8 +29,21 @@ void Menu()
 	int iChose = createMainMenu();
 	if (iChose == 1)
 	{
-		//to do sth
 		system("cls");
+		gotoxy(75, 3);
+		SetColor(51);
+		cout << "TAP HOA TU CA" << endl; // In ten shop
+
+		int iX = 5, iY = 5;
+		printLetterHead(5, 5, 150, 2, 11); // in muc cac thong tin
+		HangHoa temp;
+		while (!hangHoa.isEmpty())
+		{
+			iY += 3;
+			temp = hangHoa.deQueue();
+			temp.printHangHoa(iX, iY);
+		}
+		//printGoods(hangHoa);
 	}
 	else if (iChose == 2)
 	{
@@ -152,7 +165,7 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 			string iCheck = h.getMaHang();
 			if (iCheck.length() != 4) // kiem tra ma hang co 4 ki tu hay khong
 			{
-				cout << "Ma hang lon hon 4 ki tư"; 
+				cout << "Ma hang lon hon 4 ki tu"; 
 				break;
 			}
 			hangHoa.enQueue(h);
@@ -166,3 +179,19 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 /******************************************
 * Decription Se in ra thong tin hang hoa
 ******************************************/
+void printGoods(Queue<HangHoa> hangHoa)
+{
+	gotoxy(75, 3);
+	SetColor(51);
+	cout << "TAP HOA TU CA" << endl; // In ten shop
+
+	int iX = 5, iY = 5;
+	printLetterHead(5, 5, 150, 2, 11); // in muc cac thong tin
+	HangHoa temp;
+	while (!hangHoa.isEmpty())
+	{
+		iY += 3;
+		temp = hangHoa.deQueue();
+		temp.printHangHoa(iX, iY);
+	}
+}

@@ -91,4 +91,44 @@ public:
         os << h._iSoLuong << endl;
         return os;
     }
+    void printHangHoa(int x, int y)
+    {
+        int yn = y;
+        SetColor(15);
+        gotoxy(x + 1, yn);
+        cout << _strMaHang;
+        gotoxy(x + 12, yn);
+        cout << _strTenHang;
+        gotoxy(x + 45, yn);
+        cout << _strNoiSanXuat;
+        gotoxy(x + 60, yn);
+        cout << _strMauSac;
+        gotoxy(x + 80, yn);
+        cout << _iGiaBan;
+        gotoxy(x + 100, yn);
+        cout << _strNgayNhapKho;
+        gotoxy(x + 135, yn);
+        cout << _iSoLuong;
+        // dien ngan cach
+        SetColor(11);
+        gotoxy(x, y);
+        cout << "|";
+        gotoxy(x + 11, yn);
+        cout << "|";
+        gotoxy(x + 44, yn);
+        cout << "|";
+        gotoxy(x + 59, yn);
+        cout << "|";
+        gotoxy(x + 79, yn);
+        cout << "|";
+        gotoxy(x + 99, yn);
+        cout << "|";
+        gotoxy(x + 134, yn);
+        cout << "|";
+        gotoxy(x + 150, yn);
+        cout << "|";
+        gotoxy(x, yn + 1);
+        for (int i = x; i <= x + 150; i++)
+            cout << char(196);
+    }
 };

@@ -168,3 +168,56 @@ void drawMenu(int x, int y, string nd[])
 		cout << char(180);
 	}
 }
+/*************************************************
+* Decription Ve khung tieu de hang hoa
+* parameter toa do x, y, width, height, mau chu, moi dung
+**************************************************/
+void printLetterHead(int x, int y, int w, int h, int t_color)
+{
+	SetColor(t_color);
+	if (h <= 1 || w <= 1)return;
+	for (int ix = x; ix <= x + w; ix++)
+	{
+		gotoxy(ix, y);
+		cout << char(196);
+		gotoxy(ix, y + h);
+		cout << char(196);
+	}
+	for (int iy = y; iy <= y + h; iy++)
+	{
+		gotoxy(x, iy);
+		cout << '|';
+		gotoxy(x + w, iy);
+		cout << '|';
+	}
+	int yn = y + 1;
+	SetColor(220);
+	gotoxy(x + 1, yn);
+	cout << "Ma hang";
+	gotoxy(x + 12, yn);
+	cout << "Ten hang";
+	gotoxy(x + 45, yn);
+	cout << "Noi san xuat";
+	gotoxy(x + 60, yn);
+	cout << "Mau sac";
+	gotoxy(x + 80, yn);
+	cout << "Gia ban";
+	gotoxy(x + 100, yn);
+	cout << "Ngay nhap kho";
+	gotoxy(x + 135, yn);
+	cout << "So luong";
+	// dien ngan cach
+	SetColor(t_color);
+	gotoxy(x + 11, yn);
+	cout << "|";
+	gotoxy(x + 44, yn);
+	cout << "|";
+	gotoxy(x + 59, yn);
+	cout << "|";
+	gotoxy(x + 79, yn);
+	cout << "|";
+	gotoxy(x + 99, yn);
+	cout << "|";
+	gotoxy(x + 134, yn);
+	cout << "|";
+}
