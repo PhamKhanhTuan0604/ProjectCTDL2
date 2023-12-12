@@ -14,6 +14,7 @@ void Menu();
 int createMainMenu();
 void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn);
 int continueOrStop(int iY);
+void exitProgram();
 void doCase2(Queue<HangHoa> &hangHoa);
 int main()
 {
@@ -54,22 +55,18 @@ void Menu()
 				iCount++;
 			}
 			//Lua chon tiep tuc hay thoat ra
-			gotoxy(50, iY + 5);
-			SetColor(10);
-			cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh: ";
-			SetColor(7);
-			int iSelect;
-			cin >> iSelect;
-			if (iSelect == 1)
+			int iDo = continueOrStop(iY);
+			if (iDo == 1)
 				Menu();
-			else if (iSelect == 0)
-				exit(0);
+			else if (iDo == 0)
+			{
+				exitProgram();
+			}
 
 			break;
 		}
 		case 2:
 		{
-			//readHangHoa(hangHoa, strFile);
 			system("cls");
 			doCase2(hangHoa);
 		}
@@ -87,6 +84,8 @@ void Menu()
 		}
 		case 5:
 		{
+			system("cls");
+			cout << "Tam biet quy khach <3";
 			exit(0);
 			break;
 		}
@@ -195,6 +194,7 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn)
 			if (iCheck.length() != 4) // kiem tra ma hang co 4 ki tu hay khong
 			{
 				cout << "Ma hang lon hon 4 ki tu"; 
+				system("pause");
 				break;
 				exit(0);
 			}
@@ -206,6 +206,17 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn)
 		cout << "Khong the mo file " << endl;
 	}
 }
+/***********************************
+* Decription Thong bao thoat chuong trinh
+************************************/
+void exitProgram()
+{
+	system("cls");
+	SetColor(21);
+	cout << "Tam biet quy khach <3";
+	SetColor(7);
+	exit(0);
+}
 /************************************************
 * Decription Lua chon tiep tuc hay dung lai
 * parameter toa do y
@@ -213,15 +224,15 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn)
 *************************************************/
 int continueOrStop(int iY)
 {
+	int iContinue;
 	gotoxy(50, iY + 5);
 	SetColor(10);
 	cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh: ";
 	SetColor(7);
-	int iSelect;
-	cin >> iSelect;
-	if (iSelect == 1)
+	cin >> iContinue;
+	if (iContinue == 1)
 		return 1;
-	else if (iSelect == 0)
+	else if (iContinue == 0)
 		return 0;
 }
 /***********************************************
@@ -246,12 +257,18 @@ void doCase2(Queue<HangHoa>& hangHoa)
 	//Nhap ten hang hoa can tim
 	gotoxy(50, 6);
 	SetColor(10);
-	cout << "Moi ban nhap ten hang hoa can tim:";
+	cout << "De tim kiem hang hoa, ban can nhap ten hang hoa ban muon tim!! Bam Enter de tiep tuc.";
+	char cTest = _getch();
 	gotoxy(50, 7);
 	cout << "Ten hang hoa: ";
 	SetColor(7);
-	getline(cin, strFind);
-	//cin.ignore();
+	if (cTest != '\0')
+	{
+		cin.ignore();
+		getline(cin, strFind);
+	}
+	else
+		getline(cin, strFind);
 
 	//Tim kiem
 	for (int i = 0; i < iQueueSize; i++)
@@ -266,7 +283,7 @@ void doCase2(Queue<HangHoa>& hangHoa)
 	//In ket qua tim kiem
 	if (Result.isEmpty())
 	{
-		SetColor(1);
+		SetColor(70);
 		gotoxy(50, iY2);
 		cout << "Xin loi, chung toi chua co hang hoa ban can.";
 	}
@@ -281,12 +298,12 @@ void doCase2(Queue<HangHoa>& hangHoa)
 			iY2 += 3;
 		}
 	}
-
-
 	// Quay lai hoac thoat chuong trinh
 	int iDo = continueOrStop(iY2);
 	if (iDo == 1)
 		Menu();
 	else if (iDo == 0)
-		exit(0);
+	{
+		exitProgram();
+	}
 }
