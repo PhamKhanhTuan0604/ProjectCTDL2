@@ -12,7 +12,9 @@ using namespace std;
 
 void Menu();
 int createMainMenu();
-void readHangHoa(Queue<HangHoa>& hangHoa, string& fn);
+void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn);
+int continueOrStop(int iY);
+void doCase2(Queue<HangHoa> &hangHoa);
 int main()
 {
 	Menu();
@@ -26,60 +28,73 @@ void Menu()
 	Queue<HangHoa> hangHoa;
 	string strFile = "HangHoa.txt";
 	readHangHoa(hangHoa, strFile);
-	int iChose = createMainMenu();
-	if (iChose == 1)
+	int iChoice = createMainMenu();
+	switch (iChoice)
 	{
-		system("cls");
-		gotoxy(75, 3);
-		SetColor(51);
-		cout << "TAP HOA TU CA" << endl; // In ten shop
-
-		int iX = 5, iY = 5;
-		printLetterHead(5, 5, 150, 2, 11); // in muc cac thong tin
-		HangHoa temp;
-		//In thong tin hang hoa
-		while (!hangHoa.isEmpty())
+		case 1:
 		{
-			iY += 3;
-			temp = hangHoa.deQueue();
-			temp.printHangHoa(iX, iY);
+			system("cls");
+			gotoxy(75, 3);
+			SetColor(51);
+			cout << "TAP HOA TU CA" << endl; // In ten shop
+			//readHangHoa(hangHoa, strFile);
+
+			int iX = 5, iY = 5;
+			printLetterHead(iX, iY, 150, 2, 11); // in muc cac thong tin
+			HangHoa temp;
+			int iQueueNumber = hangHoa.getSize(), iCount = 0;
+
+			//In thong tin hang hoa
+			while ( iCount < iQueueNumber)
+			{
+				iY += 3;
+				temp = hangHoa.deQueue();
+				temp.printHangHoa(iX, iY);
+				hangHoa.enQueue(temp);
+				iCount++;
+			}
+			//Lua chon tiep tuc hay thoat ra
+			gotoxy(50, iY + 5);
+			SetColor(10);
+			cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh: ";
+			SetColor(7);
+			int iSelect;
+			cin >> iSelect;
+			if (iSelect == 1)
+				Menu();
+			else if (iSelect == 0)
+				exit(0);
+
+			break;
 		}
-		//Lua chon tiep tuc hay thoat ra
-		gotoxy(50, iY + 5);
-		SetColor(10);
-		cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh.";
-		gotoxy(50, iY + 6);
-		cout << "Lua chon cua ban: ";
-		SetColor(7);
-		int iSelect;
-		cin >> iSelect;
-		if (iSelect == 1)
-			Menu();
-		else if (iSelect == 0)
+		case 2:
+		{
+			//readHangHoa(hangHoa, strFile);
+			system("cls");
+			doCase2(hangHoa);
+		}
+		case 3:
+		{
+			//To do sth
+			break;
+		}
+		case 4:
+		{
+			//To do sth
+			system("cls");
+			hangHoa.display();
+			break;
+		}
+		case 5:
+		{
 			exit(0);
-	}
-	else if (iChose == 2)
-	{
-		//to do sth
-		system("cls");
-		cout << 2 << endl;
-	}
-	else if (iChose == 3)
-	{
-		//to do sth
-		system("cls");
-		cout << 3 << endl;
-	}
-	else if (iChose == 4)
-	{
-		//to do sth
-		system("cls");
-		cout << 4 << endl;
-	}
-	else if (iChose == 5)
-	{
-		system("cls");
-		exit(0);
+			break;
+		}
+		default:
+		{
+			cout << "Chuong trinh co loi, se thoat";
+			break;
+		}
 	}
 }
 /***********************************************
@@ -167,9 +182,10 @@ int createMainMenu()
 /******************************************
 * @Decription Doc du lieu tu file vao queue (Hang Hoa)
 *******************************************/
-void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
+void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn)
 {
-	ifstream infile(fn);
+	ifstream infile;//
+	infile.open(strFn, ios::in);
 	if (infile.is_open())
 	{
 		HangHoa h;
@@ -180,6 +196,7 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 			{
 				cout << "Ma hang lon hon 4 ki tu"; 
 				break;
+				exit(0);
 			}
 			hangHoa.enQueue(h);
 		}
@@ -188,4 +205,88 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& fn)
 	{
 		cout << "Khong the mo file " << endl;
 	}
+}
+/************************************************
+* Decription Lua chon tiep tuc hay dung lai
+* parameter toa do y
+* return 1 neu tiep tuc, 0 neu dung lai
+*************************************************/
+int continueOrStop(int iY)
+{
+	gotoxy(50, iY + 5);
+	SetColor(10);
+	cout << "Moi ban nhap 1 de quay ve menu, 0 de ket thuc chuong trinh: ";
+	SetColor(7);
+	int iSelect;
+	cin >> iSelect;
+	if (iSelect == 1)
+		return 1;
+	else if (iSelect == 0)
+		return 0;
+}
+/***********************************************
+* Decription Thuc hien chuc nang tim kiem
+* parameter 1 Queue chua thong tin hang hoa
+************************************************/
+void doCase2(Queue<HangHoa>& hangHoa)
+{
+	gotoxy(75, 3);
+	SetColor(51);
+	cout << "TAP HOA TU CA" << endl; // In ten shop
+
+	/*Tim thong tin hang hoa*/
+	//Khai bao cac bien su dung
+	Queue<HangHoa> Result;
+	string strFind;
+	HangHoa temp;
+	bool bCheck = false;
+	int iX2 = 5, iY2 = 12;
+	int iQueueSize = hangHoa.getSize(), iCount = 0;
+
+	//Nhap ten hang hoa can tim
+	gotoxy(50, 6);
+	SetColor(10);
+	cout << "Moi ban nhap ten hang hoa can tim:";
+	gotoxy(50, 7);
+	cout << "Ten hang hoa: ";
+	SetColor(7);
+	getline(cin, strFind);
+	//cin.ignore();
+
+	//Tim kiem
+	for (int i = 0; i < iQueueSize; i++)
+	{
+		temp = hangHoa.deQueue();
+		if (temp.getTenHang() == strFind)
+		{
+			Result.enQueue(temp);
+		}
+		hangHoa.enQueue(temp);
+	}
+	//In ket qua tim kiem
+	if (Result.isEmpty())
+	{
+		SetColor(1);
+		gotoxy(50, iY2);
+		cout << "Xin loi, chung toi chua co hang hoa ban can.";
+	}
+	else
+	{
+		printLetterHead(iX2, iY2, 150, 2, 11);
+		iY2 += 3;
+		while (!Result.isEmpty())
+		{
+			temp = Result.deQueue();
+			temp.printHangHoa(iX2, iY2);
+			iY2 += 3;
+		}
+	}
+
+
+	// Quay lai hoac thoat chuong trinh
+	int iDo = continueOrStop(iY2);
+	if (iDo == 1)
+		Menu();
+	else if (iDo == 0)
+		exit(0);
 }
