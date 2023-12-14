@@ -221,3 +221,61 @@ void printLetterHead(int x, int y, int w, int h, int t_color)
 	gotoxy(x + 134, yn);
 	cout << "|";
 }
+
+/**********************************************
+* @Decription In ra tieu de don hang
+* parameter toa do x, y, dai, cao, mau chu
+**********************************************/
+void printHeadCustomer(int x, int y, int w, int h, int t_color)
+{
+	SetColor(t_color);
+	if (h <= 1 || w <= 1)return;
+	for (int ix = x; ix <= x + w; ix++)
+	{
+		gotoxy(ix, y);
+		cout << char(196);
+		gotoxy(ix, y + h);
+		cout << char(196);
+	}
+	for (int iy = y; iy <= y + h; iy++)
+	{
+		gotoxy(x, iy);
+		cout << '|';
+		gotoxy(x + w, iy);
+		cout << '|';
+	}
+	int iYn = y+1;
+	SetColor(220);
+	gotoxy(x + 1, iYn);
+	cout << "STT";
+	gotoxy(x + 6, iYn);
+	cout << "Ma hang";
+	gotoxy(x + 15, iYn);
+	cout << "So luong";
+	gotoxy(x + 24, iYn);
+	cout << "Tong tien";
+	gotoxy(x + 38, iYn);
+	cout << "Ten khach hang";
+	gotoxy(x + 70, iYn);
+	cout << "Dia chi";
+	gotoxy(x + 120, iYn);
+	cout << "So dien thoai";
+	gotoxy(x + 135, iYn);
+	cout << "Ngay dat hang";
+	//In vach ngan
+	SetColor(t_color);
+	gotoxy(x + 5, iYn);
+	cout << "|";
+	gotoxy(x + 14, iYn);
+	cout << "|";
+	gotoxy(x + 23, iYn);
+	cout << "|";
+	gotoxy(x + 37, iYn);
+	cout << "|";
+	gotoxy(x + 69, iYn);
+	cout << "|";
+	gotoxy(x + 119, iYn);
+	cout << "|";
+	gotoxy(x + 134, iYn);
+	cout << "|";
+}

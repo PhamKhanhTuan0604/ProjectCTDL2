@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <string>
 #include "HangHoa.h"
+#include "DonHang.h"
 #include <fstream>
 #include <cstdlib>
 using namespace std;
@@ -13,6 +14,7 @@ using namespace std;
 void Menu();
 int createMainMenu();
 void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn);
+//void readDonHang(Queue<DonHang>& donHang, string& strFn);
 int continueOrStop(int iY);
 void exitProgram();
 void doCase2(Queue<HangHoa> &hangHoa);
@@ -27,7 +29,8 @@ int main()
 void Menu()
 {
 	Queue<HangHoa> hangHoa;
-	string strFile = "HangHoa.txt";
+	Queue<DonHang> donHang;
+	string strFile = "HangHoa.txt", strDonHang = "DonHang.txt", strAd = "Admin.txt";
 	readHangHoa(hangHoa, strFile);
 	int iChoice = createMainMenu();
 	switch (iChoice)
@@ -73,6 +76,9 @@ void Menu()
 		case 3:
 		{
 			//To do sth
+			system("cls");
+			printHeadCustomer(3, 6, 152, 2, 11);
+			_getch();
 			break;
 		}
 		case 4:
@@ -84,9 +90,7 @@ void Menu()
 		}
 		case 5:
 		{
-			system("cls");
-			cout << "Tam biet quy khach <3";
-			exit(0);
+			exitProgram();
 			break;
 		}
 		default:
@@ -206,8 +210,41 @@ void readHangHoa(Queue<HangHoa>& hangHoa, string& strFn)
 		cout << "Khong the mo file " << endl;
 	}
 }
+
+/*************************************
+* @Decription Doc va ghi hang hoa ra file DonHang.txt
+*************************************/
+void readAndChangeBill(Queue<DonHang>& donHang, string& strDonHang)
+{
+	DonHang d;
+	//Doc file Don Hang
+	ifstream infile(strDonHang);
+	if (!infile.is_open())
+	{
+		cout << "Khong the mo file don hang";
+		exit;
+	}
+	else
+	{
+		while (cin >> d)
+		{
+			donHang.enQueue(d);
+		}
+	}
+	infile.close();
+
+
+
+	//Ghi file don hang
+	ofstream outfile(strDonHang, ios::trunc);
+	while (!donHang.isEmpty())
+	{
+		d = donHang.deQueue();
+		outfile << d;
+	}
+}
 /***********************************
-* Decription Thong bao thoat chuong trinh
+* @Decription Thong bao thoat chuong trinh
 ************************************/
 void exitProgram()
 {
@@ -218,9 +255,9 @@ void exitProgram()
 	exit(0);
 }
 /************************************************
-* Decription Lua chon tiep tuc hay dung lai
-* parameter toa do y
-* return 1 neu tiep tuc, 0 neu dung lai
+* @Decription Lua chon tiep tuc hay dung lai
+* @parameter toa do y
+* @return 1 neu tiep tuc, 0 neu dung lai
 *************************************************/
 int continueOrStop(int iY)
 {
@@ -236,8 +273,8 @@ int continueOrStop(int iY)
 		return 0;
 }
 /***********************************************
-* Decription Thuc hien chuc nang tim kiem
-* parameter 1 Queue chua thong tin hang hoa
+* @Decription Thuc hien chuc nang tim kiem
+* @parameter 1 Queue chua thong tin hang hoa
 ************************************************/
 void doCase2(Queue<HangHoa>& hangHoa)
 {
